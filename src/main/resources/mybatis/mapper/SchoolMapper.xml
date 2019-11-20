@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjl.student_management.dao.SchoolDao">
+
+    <resultMap type="com.wjl.student_management.entity.School" id="schoolMap">
+        <!-- property：主键在pojo中的属性名 -->
+        <!-- column：主键在数据库中的列名 -->
+        <id column="id" property="id"/>
+        <result column="sch_name" property="schName"/>
+        <result column="sch_addr" property="schAddr"/>
+        <result column="sch_tel" property="schTel"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="schoolMap">
+       select id,sch_name,sch_addr,sch_tel
+       from school
+    </select>
+
+    <insert id="insert" parameterType="com.wjl.student_management.entity.School">
+       insert into school
+       (sch_name,sch_addr,sch_tel)
+       values
+      (#{schName},#{schAddr},#{schTel})
+
+   </insert>
+</mapper>

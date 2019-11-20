@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>backend</title>
+    <link rel="stylesheet"  th:href="@{/asserts/css/bootstrap.css}" />
+    <link rel="stylesheet"  th:href="@{/asserts/css/index.css}" />
+    <script th:src="@{/asserts/js/jquery.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap.js}"></script>
+    <script th:src="@{/asserts/js/userSetting.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap-paginator.js}"></script>
+    <script th:src="@{/asserts/js/distpicker.js}"></script>
+    <script th:src="@{/asserts/layer/layer.js}"></script>
+    <script th:inline="javascript">
+        $(function () {
+            //回显模态框
+            $('#mclass').change(function () {
+                $('#mname').empty();
+                $.get(
+                    /*[[@{/major/sonSelect}]]*/,
+                    {'mclass':$('#mclass').val()},
+                    function (result) {
+                        $('#mname').append('<option value="">- 专业名称 -</option>')
+
+                        for (var i = 0; i < result.data.length; i++) {
+                            $('#mname').append(`<option value="${result.data[i].mname}">${result.data[i].mname}</option>`)
+                        }
+                    }
+                );
+            })
+
+        })
+
+    </script>
+</head>
+<body>
+
+<div style="margin-left: 30px" >
+    <h2>学生信息</h2>
+    <hr/>
+<form class="form-inline" th:action="@{/students}" method="get">
+    <div class="form-group">
+        <label for="mclass">专业类别</label>
+        <select type="text" class="form-control" id="mclass">
+            <option value="">- 选择专业 -</option>
+            <option th:each="major: ${major}" th:value="${major.mclass}">[[ ${major.mclass} ]]</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="mclass">专业名称</label>
+        <select type="text" class="form-control" id="mname" name="major">
+
+            <option value="">- 专业名称 -</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label >姓名</label>
+        <input type="text" style="width: 100px;margin-right: 20px" class="form-control"  name="name" placeholder="张三"></input>
+    </div>
+    <div class="form-group">
+        <label >身份证号</label>
+        <input type="text" style="width: 100px;margin-right: 20px" class="form-control"  name="cardId" placeholder=""></input>
+    </div>
+    <button type="submit" class="btn btn-primary">查询</button>
+    <a th:href="@{/student}"  class="btn btn-primary">添加学生</a>
+</form>
+<table  class="table table-bordered  table-hover text-center" style='text-align: center; margin-top: 20px'>
+    <thead>
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>身份证号</th>
+        <th>学校</th>
+        <th>专业</th>
+        <th>入学时间</th>
+    </tr>
+    </thead>
+    <tr  th:each="student:${student}">
+        <td th:if="${student!=null}">[[${student.sno}]]</td>
+        <td th:if="${student!=null}">[[${student.name}]]</td>
+        <td th:if="${student!=null}">[[${student.sex}]]</td>
+        <td th:if="${student!=null}">[[${student.cardId}]]</td>
+        <td th:if="${student!=null}">[[${student.school}]]</td>
+        <td th:if="${student!=null}">[[${student.major}]]</td>
+        <td th:if="${student!=null}">[[${student.enrYear}]]</td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

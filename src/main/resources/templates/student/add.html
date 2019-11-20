@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加专业库</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>backend</title>
+    <link rel="stylesheet" th:href="@{/asserts/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/asserts/css/index.css}"/>
+    <script th:src="@{/asserts/js/jquery.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap.js}"></script>
+    <script th:src="@{/asserts/js/userSetting.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap-paginator.js}"></script>
+    <script th:src="@{/asserts/js/distpicker.js}"></script>
+    <script th:src="@{/asserts/layer/layer.js}"></script>
+    <script>
+        $(function () {
+            //上传图像预览
+            $('#img').on('change', function () {
+                $('#img2').attr('src', window.URL.createObjectURL(this.files[0]));
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="row" style="margin: 10px 100px; width: 400px ;position: relative">
+    <h2>添加学生</h2>
+        <hr>
+        <form th:action="@{/student}" method="post" enctype="multipart/form-data">
+            <!-- LastName -->
+
+            <input type="hidden" name="_method" value="put" th:if="${student!=null}">
+
+            <input type="hidden" name="id" th:value="${student.id}" th:if="${student!=null}">
+            <div class="form-group">
+                <label for="name">学生姓名</label>
+                <input type="txext" class="form-control input-sm" id="name"
+                       name="name" placeholder="张三">
+            </div>
+            <!-- Email -->
+            <div class="form-group">
+                <label >学号</label>
+                <input type="text" class="form-control input-sm"  name="sno"
+                       placeholder="2016010510">
+            </div>
+            <div class="form-group">
+                <label >身份证号</label>
+                <input type="text" class="form-control input-sm"  name="cardId"
+                       placeholder="2016010510">
+            </div>
+            <!--gender-->
+            <div class="form-group form-check-inline">
+                <label>性别</label><br/>
+                <label class="radio-inline">
+                    <input  type="radio" name="gender"  id="inlineRadio1" value="男"> 男
+                </label>
+                <label class="radio-inline" style="margin-left: 20px">
+                    <input type="radio" name="gender" id="inlineRadio2" value="女"> 女
+                </label>
+            </div>
+            <!-- department -->
+            <div class="form-inline" data-toggle="distpicker">
+                <div class="form-group">
+                    <label for="eprovinceName">省</label>
+                    <select style="width: 100px;margin-right: 20px" class="form-control" id="eprovinceName" data-province="-选择省-"
+                            name="province"></select>
+                </div>
+                <div class="form-group">
+                    <label for="ecityName">市</label>
+                    <select style="width: 100px;margin-right: 20px" class="form-control" id="ecityName" data-city="-选择市-" name="city"></select>
+                </div>
+                <div class="form-group">
+                    <label for="edistrictName">区</label>
+                    <select style="width: 100px;margin-right: 20px" class="form-control" id="edistrictName" data-district="-选择区-"
+                            name="district"></select>
+                </div>
+            </div>
+            <!--图片上传-->
+            <div class="form-group">
+                <label for="img">照片</label>
+                <input type="file"  class="form-control input-sm"
+                       id="img" placeholder="软件工程" name="file">
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">学校</label>
+                <input type="text"  class="form-control input-sm"
+                       placeholder="清华大学" name="school">
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">专业</label>
+                <input type="text"  class="form-control input-sm"
+                        placeholder="软件工程" name="major">
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">入学年份</label>
+                <input type="text"  class="form-control input-sm"
+                       id="birthDate" placeholder="2012/9/1" name="enrYear">
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">毕业年份</label>
+                <input type="text"  class="form-control input-sm"
+                        placeholder="2016/6/6" name="gradYear">
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">学制</label>
+                <input type="text"  class="form-control input-sm"
+                        placeholder="4年" name="eduYear">
+            </div>
+
+            <button type="submit" class="btn btn-primary">提 交</button>
+        </form>
+        <div class="col-sm-4 text-center" style="position: absolute;left: 500px;top: 100px;">
+            <!-- 显示图像预览 -->
+            <img style="width: 160px;height: 180px;" id="img2"  class="glyphicon glyphicon-user" th:src="@{/asserts/images/add.png}">
+
+        </div>
+    </div>
+</body>
+</html>

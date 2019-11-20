@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>学生学籍-后台管理系统</title>
+    <link rel="stylesheet"  th:href="@{/asserts/css/bootstrap.css}" />
+    <link rel="stylesheet"  th:href="@{/asserts/css/index.css}" />
+    <script th:src="@{/asserts/js/jquery.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap.js}"></script>
+    <script th:src="@{/asserts/js/userSetting.js}"></script>
+    <script type="text/javascript" th:inline="javascript">
+
+
+        $(function(){
+            // 点击切换页面
+
+            $("#product-type-set").click(function() {
+                $("#frame-id").attr("src",/*[[@{/province}]]*/); //  学生信息
+            });
+            $("#product-set").click(function() {
+                $("#frame-id").attr("src", /*[[@{/proVerify}]]*/); //审核
+            });
+            $("#po").click(function() {
+                $("#frame-id").attr("src", /*[[@{/schools}]]*/);
+            });
+
+        });
+
+
+        /*function changeFrameHeight(){
+            var ifm= document.getElementById("frame-id");
+            ifm.height=document.documentElement.clientHeight-56; //56是头顶的高度，和网友估计不一样。
+        }
+        $(function(){ window.onresize=function(){
+            changeFrameHeight(); }}); //这里不知道是否还要 $(function(){}) 这个闭包吗？后证实不需要*/
+    </script>
+</head>
+
+<body>
+<div class="wrapper-cc clearfix">
+    <div class="content-cc">
+        <!-- header start -->
+        <div class="clear-bottom head">
+            <div class="container head-cc">
+                <p>学生学籍<span>后台管理系统</span></p>
+                <div class="welcome">
+                    <div class="left">欢迎您：</div>
+                    <div class="right">xxx</div>
+                    <div class="exit">退出</div>
+                </div>
+            </div>
+        </div>
+        <!-- header end -->
+        <!-- content start -->
+        <div class="container-flude flude-cc" id="a">
+            <div class="row user-setting">
+                <div class="col-xs-2 user-wrap">
+                    <ul class="list-group">
+                        <li class="list-group-item active" name="userSet" id="product-type-set">
+                            <i class="glyphicon glyphicon-lock"></i> &nbsp;全省学生统计
+                        </li>
+                        <li class="list-group-item" name="userPic" id="product-set">
+                            <i class="glyphicon glyphicon-facetime-video"></i> &nbsp;审核
+                        </li>
+                        <li class="list-group-item" name="userPic" id="po">
+                            <i class="glyphicon glyphicon-facetime-video"></i> &nbsp;专业库
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-xs-10" id="userPanel">
+                    <iframe id="frame-id" th:src= "@{/province}" width="100%" height="100%" frameborder="0" scrolling="auto">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+        <!-- content end-->
+    </div>
+</div>
+<!-- footers start -->
+<div class="footer">
+    版权所有：乌
+</div>
+<!-- footers end -->
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjl.student_management.dao.MajorDao">
+
+
+
+    <select id="selectById" resultType="com.wjl.student_management.entity.Major">
+        select major.id ,major.mname,major.mclass
+        from major,school,school_major as sm
+        where major.id = sm.majorid and school.id = sm.schoolid and school.id = #{id}
+        group by major.id
+
+    </select>
+
+    <select id="seletAllMajor" resultType="com.wjl.student_management.entity.Major">
+        select *
+        from major
+        group by mclass
+    </select>
+
+    <select id="selectByMclass" resultType="com.wjl.student_management.entity.Major">
+        select mname,id
+        from major
+        where mclass = #{mclass}
+    </select>
+
+    <insert id="insertMajor" >
+       insert into school_major
+       (schoolid,majorid)
+       values
+      (#{schoolId},#{majorId})
+
+   </insert>
+
+
+</mapper>

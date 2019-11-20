@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>backend</title>
+    <link rel="stylesheet"  th:href="@{/asserts/css/bootstrap.css}" />
+    <link rel="stylesheet"  th:href="@{/asserts/css/index.css}" />
+    <script th:src="@{/asserts/js/jquery.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap.js}"></script>
+    <script th:src="@{/asserts/js/userSetting.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap-paginator.js}"></script>
+    <script th:src="@{/asserts/js/distpicker.js}"></script>
+    <script th:src="@{/asserts/layer/layer.js}"></script>
+    <script th:inline="javascript">
+
+
+      function modifyStatus(id,status) {
+          $.ajax({
+                  type:'put',
+                  url:/*[[@{/modifyStatus}]]*/,
+                  data:{'id':id,'status':status},
+                  dataType:'json',
+                  success:function (result) {
+                      layer.msg(result.message,
+                          {
+                              time:1000
+                          },
+                          function () {
+                              location.href=(/*[[@{/proVerify}]]*/);
+                          })
+                  }
+
+
+
+
+              }
+
+          )
+      }
+    </script>
+</head>
+<body>
+
+<div style="margin-left: 30px" >
+    <h2>审核状态</h2>
+    <hr/>
+    <table  class="table table-bordered  table-hover text-center" style='text-align: center; margin-top: 20px'>
+        <thead>
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>身份证号</th>
+            <th>学校</th>
+            <th>专业</th>
+            <th>入学时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tr  th:each="student:${student}">
+            <td th:if="${student!=null&&student.status==2}">[[${student.sno}]]</td>
+            <td th:if="${student!=null&&student.status==2}">[[${student.name}]]</td>
+            <td th:if="${student!=null&&student.status==2}">[[${student.sex}]]</td>
+            <td th:if="${student!=null&&student.status==2}">[[${student.cardId}]]</td>
+            <td th:if="${student!=null&&student.status==2}">[[${student.school}]]</td>
+            <td th:if="${student!=null&&student.status==2}">[[${student.major}]]</td>
+            <td th:if="${student!=null&&student.status==2}">[[${student.enrYear}]]</td>
+            <td th:if="${student!=null&&student.status==2}">
+                <button  th:onclick="modifyStatus([[${student.id}]],1)" class="btn-primary" >通过</button>
+                <button  th:onclick="modifyStatus([[${student.id}]],0)" class="btn-danger" >拒绝</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

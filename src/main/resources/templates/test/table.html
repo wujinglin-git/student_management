@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  th:href="@{/asserts/css/bootstrap.css}" />
+    <link rel="stylesheet"  th:href="@{/asserts/css/index.css}" />
+    <link rel="stylesheet"  th:href="@{/asserts/css/bootstrap-table.css}" />
+    <script th:src="@{/asserts/js/jquery.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap.js}"></script>
+    <script th:src="@{/asserts/js/userSetting.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap-paginator.js}"></script>
+    <script th:src="@{/asserts/js/bootstrap-table.js}"></script>
+    <title>bootstrap table onClickRow点击行事件</title>
+    <style>
+        .table-demo {
+            width: 80%;
+            margin: 30px auto 0px auto;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/upload}" method="post" enctype="multipart/form-data" >
+    <input type="file" name="file" >
+    <input type="submit" th:value="sub">
+</form>
+</body>
